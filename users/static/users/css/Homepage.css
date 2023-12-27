@@ -1,0 +1,15 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('../img/Bgd.png');
+    background-size: cover; /* Adjust as needed */
+    background-position: center; /* Adjust as needed */
+    background-repeat: no-repeat; /* Adjust as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+

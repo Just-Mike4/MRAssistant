@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 class Homepage(TemplateView):
-    template_name=''
+    template_name='users/Homepage.html'
 
 class SignInView(CreateView):
     form_class=UserForm
