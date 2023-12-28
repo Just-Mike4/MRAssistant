@@ -1,6 +1,8 @@
 {% extends "users/base.html"%}
 {% block content %}
 
+<h1>Welcome To MRAssistant</h1>
+<p>Track your Mood, Understand your feelings and get the best relaxation recommendations</p>
 
 <div class="container">
     <div class="row">
@@ -8,14 +10,14 @@
             <!-- Content for the first column -->
             <div class="mt-5 text-center">
                 <h2 class="column-heading">Create an account</h2>
-                <a href="{% url 'signup' %}" class="btn btn-outline-info btn-block">Sign Up</a>
+                <a href="{% url 'signup' %}" class="btn btn-outline-info btn-block custom-btn">Sign Up</a>
             </div>
         </div>
         <div class="col-md-6">
             <!-- Content for the second column -->
             <div class="mt-5 text-center">
                 <h2 class="column-heading">Already have an account?</h2>
-                <a href="{% url 'login' %}" class="btn btn-outline-info btn-block">Login</a>
+                <a href="{% url 'login' %}" class="btn btn-outline-info btn-block custom-btn">Login</a>
             </div>
         </div>
     </div>

@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 import secrets
 # Create your models here.
-token=secrets.token_hex(16)
 
 class MoodData(models.Model):
     MOODCHOICES = (
@@ -17,7 +16,14 @@ class MoodData(models.Model):
     description = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     moodtype = models.CharField(choices=MOODCHOICES, max_length=20)
-    token=models.CharField(default=token,max_length=17)
+    token = models.CharField(max_length=17, primary_key=True, unique=True)
+
+    def save(self, *args, **kwargs):
+       
+        if not self.token:
+            self.token = secrets.token_hex(16)  
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.moodtype} at {self.dateposted}'

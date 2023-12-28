@@ -1,21 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from django.views.generic import (CreateView,DetailView,
                                   DeleteView,UpdateView,
                                   ListView)
 from .models import MoodData
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.contrib.auth.models import User
 # Create your views here.
 
 
-class MoodDashboardView(LoginRequiredMixin,UserPassesTestMixin,ListView):
-    template_name=''
+class MoodDashboardView(LoginRequiredMixin,ListView):
+    template_name='mood/MoodDashboard.html'
     model=MoodData
+    context_object_name='Mood'
 
-    def test_func(self) -> bool | None:
-        mood = self.get_object()
-        if self.request.user == mood.user:
-            return True
-        return False
+    def get_queryset(self):
+        return self.model.objects.filter(user=self.request.user).order_by("-dateposted")
     
 class MoodAddView(LoginRequiredMixin,UserPassesTestMixin,CreateView):
     template_name=''
