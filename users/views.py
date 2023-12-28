@@ -8,9 +8,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class Homepage(TemplateView):
     template_name='users/Homepage.html'
 
-class SignInView(CreateView):
+class SignUpView(CreateView):
     form_class=UserForm
-    template_name=''
+    template_name='users/signup.html'
     success_url='mood-home'
 
 class ProfileView(LoginRequiredMixin,DetailView):

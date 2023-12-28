@@ -1,14 +1,22 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'users/css/Homepage.css' %}">
+{% extends "users/base.html"%}
+{% block content %}
 
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Content for the first column -->
+            <div class="mt-5 text-center">
+                <h2 class="column-heading">Create an account</h2>
+                <a href="{% url 'signup' %}" class="btn btn-outline-info btn-block">Sign Up</a>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Content for the second column -->
+            <div class="mt-5 text-center">
+                <h2 class="column-heading">Already have an account?</h2>
+                <a href="{% url 'login' %}" class="btn btn-outline-info btn-block">Login</a>
+            </div>
+        </div>
+    </div>
+{% endblock content%}
