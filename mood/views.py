@@ -1,10 +1,10 @@
-from django.shortcuts import get_object_or_404
 from django.views.generic import (CreateView,DetailView,
                                   DeleteView,UpdateView,
                                   ListView)
 from .models import MoodData
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-from django.urls import reverse
+from django.contrib.messages.views import SuccessMessageMixin
+
 # Create your views here.
 
 
@@ -16,12 +16,13 @@ class MoodDashboardView(LoginRequiredMixin,ListView):
     def get_queryset(self):
         return self.model.objects.filter(user=self.request.user).order_by("-dateposted")
     
-class MoodAddView(LoginRequiredMixin,CreateView):
+class MoodAddView(LoginRequiredMixin,SuccessMessageMixin,CreateView):
     template_name='mood/MoodCreate.html'
     model=MoodData
     fields=['moodtype','description']
     context_object_name='moods'
     success_url='/'
+    success_message='Mood Recorded Successfully'
     
 
     def form_valid(self, form):
@@ -39,11 +40,12 @@ class MoodReadView(LoginRequiredMixin,UserPassesTestMixin,DetailView):
             return True
         return False
 
-class MoodDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+class MoodDeleteView(LoginRequiredMixin,UserPassesTestMixin,SuccessMessageMixin,DeleteView):
     template_name='mood/MoodDelete.html'
     model=MoodData
     success_url='/'
     context_object_name='moodd'
+    success_message='Mood Deleted Successfully'
 
     def test_func(self) -> bool | None:
         mood = self.get_object()
@@ -51,12 +53,13 @@ class MoodDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
             return True
         return False
 
-class MoodUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView):
+class MoodUpdateView(LoginRequiredMixin,UserPassesTestMixin,SuccessMessageMixin,UpdateView):
     template_name='mood/MoodCreate.html'
     model=MoodData
     fields=['moodtype','description']
     context_object_name='moods'
     success_url='/'
+    success_message='Mood Updated Successfully'
 
     def test_func(self) -> bool | None:
         mood = self.get_object()

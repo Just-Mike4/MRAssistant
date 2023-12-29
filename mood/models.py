@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import CustomUser
 from django.utils import timezone
 import secrets
 from django.urls import reverse
@@ -15,7 +15,7 @@ class MoodData(models.Model):
     )
     dateposted = models.DateField(default=timezone.now)
     description = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     moodtype = models.CharField(choices=MOODCHOICES, max_length=20)
     token = models.CharField(max_length=17, primary_key=True, unique=True)
 
