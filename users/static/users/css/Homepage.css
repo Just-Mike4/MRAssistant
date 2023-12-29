@@ -29,7 +29,7 @@ body p, body div a, .text-muted{
 }
 
 body div a:hover{
-    color: bisque;
+    color: rgb(213, 222, 183);
 }
 
 body div small{
@@ -92,3 +92,4 @@ legend {
     border-color: aquamarine;
     background-color: rgb(61, 83, 75);
   }
+  

@@ -1,0 +1,18 @@
+{% extends "mood/base.html"%}
+{% block content %}
+
+<div class="container p-5">
+    <div class="card border-primary mb-3">
+        <div class="card-header">
+            <h5 class="card-title">{{ moodr.moodtype }}</h5>
+            <small class="text-muted">{{ moodr.dateposted|date:"F d,Y" }}</small>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ moodr.description }}</p>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'mood-update' moodr.token %}">Update</a>
+          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{%url 'mood-delete' moodr.token %}">Delete</a>
+        </div>
+    </div>
+</div>
+      
+{% endblock content%}
