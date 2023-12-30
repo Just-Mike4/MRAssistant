@@ -5,14 +5,57 @@
 <div class="content-section p-5">
     <form method="POST">
         {% csrf_token %}
+        <input type="hidden" id="selectedMood" name="selected_mood" value="{{ moodu.moodtype|default:'' }}">
+
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Set Your Mood</legend>
+
+            <label for="id_moodtype" class="form-label">
+                Moodtype<span class="asteriskField">*</span> </label>
+
+            <div class="emoji-container" id="emojiContainer">
+                <!-- Add your emoji options here -->
+                <option value="" class="emoji-option selected">---------</option>
+                <div class="emoji-option" onclick="selectMood('Excited')">😃Excited</div>
+                <div class="emoji-option" onclick="selectMood('Happy')">😊Happy</div>
+                <div class="emoji-option" onclick="selectMood('Fear')">😨Fear</div>
+                <div class="emoji-option" onclick="selectMood('Sad')">😢Sad</div>
+                <div class="emoji-option" onclick="selectMood('Angry')">😠Angry</div>
+                <!-- Add more emoji options as needed -->
+            </div>
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">
             <button class="btn btn-outline-info custom-btn" type="submit">Submit</button>
         </div>
     </form>
+    
   </div>
 
+  <script defer>
+    window.onload = function () {
+        const selectedMoodInput = document.getElementById('selectedMood');
+        const selectedMoodValue = selectedMoodInput.value;
+        selectMood(selectedMoodValue);
+    };
+
+    function selectMood(mood) {
+        // Clear previous selections
+        const emojiOptions = document.querySelectorAll('.emoji-option');
+        emojiOptions.forEach(option => option.classList.remove('selected'));
+
+        // Highlight the selected emoji
+        const selectedEmoji = Array.from(emojiOptions).find(option => option.textContent.includes(mood));
+        if (selectedEmoji) {
+            selectedEmoji.classList.add('selected');
+
+            // Set the selected mood in the hidden input field
+            const selectedMoodInput = document.getElementById('selectedMood');
+            selectedMoodInput.value = mood;
+
+            // You can use 'mood' for further processing (e.g., sending it to a form field)
+            console.log('Selected Mood:', mood);
+        }
+    }
+</script>
 {% endblock content%}

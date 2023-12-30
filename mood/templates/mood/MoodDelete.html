@@ -1,24 +1,25 @@
-{% extends "mood/base.html"%}
+{% extends "mood/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
 <div class="container p-5">
-    <div class="content-section">
+    <div class="card border-danger mb-3">
+        <div class="card-header">
+            <h2>Are you sure you want to delete the post <small>"{{ moodd.moodtype }}"</small> at <small>{{ moodd.dateposted }}</small></h2>
+        </div>
         <div class="card-body">
             <form method="POST">
                 {% csrf_token %}
+                <div class="form-group mb-4">
+                    
+                </div>
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Delete Post </legend>
                     <div class="form-group">
-                        <h2>Are you sure you want to delete the post <small>"{{ moodd.moodtype }}"</small> at <small>{{ moodd.dateposted }}</small></h2>
+                        <button class="btn btn-outline-danger mr-2" type="submit">Yes, Delete</button>
+                        <a class="btn btn-outline-secondary" href="{% url 'mood-read' moodd.token %}">Cancel</a>
                     </div>
                 </fieldset>
-                <div class="form-group">
-                    <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
-                    <a class="btn btn-outline-secondary" href="{% url 'mood-read' moodd.token%}">Cancel</a>
-                </div>
             </form>
         </div>
     </div>
 </div>
-
-
-{% endblock content%}
+{% endblock content %}

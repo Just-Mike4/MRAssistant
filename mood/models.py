@@ -9,7 +9,7 @@ class MoodData(models.Model):
     MOODCHOICES = (
         ("Excited", "Excited"),
         ("Happy", "Happy"),
-        ("Relaxed", "Relaxed"),
+        ("Fear", "Fear"),
         ("Sad", "Sad"),
         ("Angry", "Angry"),
     )

@@ -289,3 +289,12 @@ form {
       padding-top: 10%;
   }
 }
+
+.custom-card{
+  color: #080808;
+}
+
+.custom-card:hover{
+  color:rgb(38, 103, 81);
+}
+

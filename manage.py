@@ -2,7 +2,32 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+import sys
+import string
+import spacy
 
+from spacy.lang.en.stop_words import STOP_WORDS
+nlp = spacy.load('en_core_web_sm')
+stopwords=list(STOP_WORDS)
+punc=string.punctuation
+def text_cleaner(sentence):
+    doc=nlp(sentence)
+    
+    tokens=[]
+    for token in doc:
+        if token.lemma_!="-PRON-":
+            temp=token.lemma_.lower().strip()
+        else:
+            temp=token.lower_
+        tokens.append(temp)
+        
+    cleaned_tokens=[]
+    for token in tokens:
+        if token not in stopwords and token not in punc:
+            cleaned_tokens.append(token)
+    return cleaned_tokens
+
+sys.modules['text_cleaner'] = text_cleaner
 
 def main():
     """Run administrative tasks."""
