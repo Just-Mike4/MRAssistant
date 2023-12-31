@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     "mood.apps.MoodConfig",
     "crispy_forms",
     "crispy_bootstrap5",
+    "rest_framework",
+    "rest_framework.authtoken",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
