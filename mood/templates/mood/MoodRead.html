@@ -2,6 +2,7 @@
 {% block content %}
 
 <div class="container p-5">
+    <!-- User's Mood Card -->
     <div class="card border-primary mb-3">
         <div class="card-header">
             <h5 class="card-title">{{ moodr.moodtype }}</h5>
@@ -10,9 +11,38 @@
         <div class="card-body">
             <p class="card-text">{{ moodr.description }}</p>
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'mood-update' moodr.token %}">Update</a>
-          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{%url 'mood-delete' moodr.token %}">Delete</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{%url 'mood-delete' moodr.token %}">Delete</a>
         </div>
     </div>
+
+    <!-- Recommendations Cards with Animation -->
+    <div class="row">
+        {% for recommendation in recommendations %}
+        <div class="col-md-4 mb-3" style="opacity: 0; animation: fadeIn 1s ease-in-out forwards;">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="card-title">{{ recommendation.0 }}</h6>
+                </div>
+                <div class="card-body" style="max-height: 100px; overflow: hidden;">
+                    <p class="card-text">{{ recommendation.1 }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
+
+<!-- CSS Animation -->
+<style>
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+</style>
+
       
 {% endblock content%}

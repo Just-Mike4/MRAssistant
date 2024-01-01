@@ -11,6 +11,7 @@ from plotly.offline import plot
 import plotly.express as px
 import pandas as pd
 from plotly.subplots import make_subplots
+from .function import get_random_unique_recommendations
 # Create your views here.
 
 model_path = 'RMA-EMO.joblib'
@@ -106,6 +107,16 @@ class MoodReadView(LoginRequiredMixin,UserPassesTestMixin,DetailView):
         if self.request.user == mood.user:
             return True
         return False
+    
+    def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+        context=super().get_context_data(**kwargs)
+        user_mood = self.get_object().moodtype
+
+        recommendations = get_random_unique_recommendations(user_mood, num_recommendations=3)
+
+        context['recommendations'] = recommendations
+
+        return context
 
 class MoodDeleteView(LoginRequiredMixin,UserPassesTestMixin,SuccessMessageMixin,DeleteView):
     template_name='mood/MoodDelete.html'
