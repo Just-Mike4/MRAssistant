@@ -1,12 +1,16 @@
+from typing import Any
 from django.views.generic import (CreateView,DetailView,
                                   DeleteView,UpdateView,
                                   ListView)
 from .models import MoodData
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib import messages
 from joblib import load
-import os
-
+from plotly.offline import plot
+import plotly.express as px
+import pandas as pd
+from plotly.subplots import make_subplots
 # Create your views here.
 
 model_path = 'RMA-EMO.joblib'
@@ -18,8 +22,60 @@ class MoodDashboardView(LoginRequiredMixin,ListView):
     context_object_name='Moods'
 
     def get_queryset(self):
-        return self.model.objects.filter(user=self.request.user).order_by("-dateposted")
-    
+        return MoodData.objects.filter(user=self.request.user).order_by('-dateposted')
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        data= MoodData.objects.filter(user=self.request.user)
+        plot_data=[
+            {
+            'Moodtype':x.moodtype,
+            'DatePosted':x.dateposted,
+
+        } 
+        for x in data]
+
+        df=pd.DataFrame(plot_data)
+
+        df['DatePosted'] = pd.to_datetime(df['DatePosted'])
+
+        df = df.sort_values(by='DatePosted')
+
+        # Create a subplot with a line plot
+        fig = make_subplots(rows=1, cols=1)
+        fig.add_trace(
+            px.line(
+                df,
+                x='DatePosted',
+                y='Moodtype',
+                markers='Moodtype',  # Use markers to represent each mood type
+                line_shape='linear'  # Connect points with a line
+            ).update_traces(selector=dict(type='scatter'), showlegend=False).data[0]
+        )
+
+        # Add rangeselector to enable zooming
+        fig.update_layout(
+            xaxis=dict(
+                rangeselector=dict(
+                    buttons=list([
+                        dict(count=1, label="1d", step="day", stepmode="backward"),
+                        dict(count=1, label="1m", step="month", stepmode="backward"),
+                        dict(count=6, label="6m", step="month", stepmode="backward"),
+                        dict(count=1, label="YTD", step="year", stepmode="todate"),
+                        dict(count=1, label="1y", step="year", stepmode="backward"),
+                        dict(step="all")
+                    ])
+                ),
+                rangeslider=dict(visible=True),
+                type="date"
+            ),
+            yaxis_title='Mood Type',
+        )
+        mood_plot=plot(fig,output_type="div")
+        context['mood_plot']=mood_plot
+
+        return context
+
 class MoodAddView(LoginRequiredMixin,SuccessMessageMixin,CreateView):
     template_name='mood/MoodCreate.html'
     model=MoodData
@@ -36,7 +92,8 @@ class MoodAddView(LoginRequiredMixin,SuccessMessageMixin,CreateView):
             form.instance.moodtype = selected_mood
         else:
             form.instance.moodtype=model.predict([self.request.POST.get('description', None)])[0]
-
+            info_message = 'You might have forgotten to select a value for mood. We have predicted it for you. Check back and edit if need be.'
+            messages.info(self.request, info_message)
         return super().form_valid(form)
     
 class MoodReadView(LoginRequiredMixin,UserPassesTestMixin,DetailView):

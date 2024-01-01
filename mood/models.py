@@ -13,7 +13,7 @@ class MoodData(models.Model):
         ("Sad", "Sad"),
         ("Angry", "Angry"),
     )
-    dateposted = models.DateField(default=timezone.now)
+    dateposted = models.DateTimeField(default=timezone.now)
     description = models.TextField()
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     moodtype = models.CharField(choices=MOODCHOICES, max_length=20)
