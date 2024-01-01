@@ -8,12 +8,17 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 from rest_framework.status import HTTP_404_NOT_FOUND,HTTP_200_OK
 from rest_framework.authtoken.models import Token
+from rest_framework import generics
+from .serializers import MoodDataSerializers
 
 class MoodDataViewSet(viewsets.ModelViewSet):
     serializer_class=MoodDataSerializers
     queryset=MoodData.objects.all()
     authentication_classes=[TokenAuthentication]
     permission_classes=[IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 class Login(APIView):
     def post(self, request):
@@ -22,3 +27,9 @@ class Login(APIView):
             return Response({'error': 'Credentials are incorrect or user does not exist'}, status=HTTP_404_NOT_FOUND)
         token, _ = Token.objects.get_or_create(user=user)
         return Response({'token': token.key}, status=HTTP_200_OK)
+    
+class MoodDataDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MoodData.objects.all()
+    serializer_class = MoodDataSerializers
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'token'
