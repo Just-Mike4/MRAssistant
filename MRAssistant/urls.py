@@ -22,7 +22,7 @@ from mood.api_views import MoodDataViewSet,Login,UserRegistrationAPIView
 from users.api_views import CustomUserViewset
 router=DefaultRouter()
 router.register(r'mood',MoodDataViewSet,basename='user_mood')
-router.register(r'users',CustomUserViewset)
+router.register(r'user',CustomUserViewset,basename='user_profile')
 
 urlpatterns = [path("admin/", admin.site.urls),
                path("api/",include((router.urls, 'api'))),

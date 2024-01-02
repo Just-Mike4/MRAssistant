@@ -8,10 +8,9 @@ from rest_framework import status
 
 class CustomUserViewset(viewsets.ModelViewSet):
     serializer_class=CustomUserSerializer
-    queryset=CustomUser.objects.all()
     authentication_classes=[TokenAuthentication]
     permission_classes=[IsAuthenticated]
-    http_method_names=['put','get']
+    http_method_names=['put','get','delete']
 
     def get_queryset(self):
         if self.request.user.is_authenticated:

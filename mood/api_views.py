@@ -18,6 +18,7 @@ class MoodDataViewSet(viewsets.ModelViewSet):
     authentication_classes=[TokenAuthentication]
     permission_classes=[IsAuthenticated]
     queryset=MoodData.objects.all()
+    http_method_names=['put','get','delete','post']
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
