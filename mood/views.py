@@ -28,6 +28,7 @@ class MoodDashboardView(LoginRequiredMixin,ListView):
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         data= MoodData.objects.filter(user=self.request.user)
+        
         plot_data=[
             {
             'Moodtype':x.moodtype,
@@ -40,18 +41,13 @@ class MoodDashboardView(LoginRequiredMixin,ListView):
 
         df['DatePosted'] = pd.to_datetime(df['DatePosted'])
 
-        df = df.sort_values(by='DatePosted')
-
-        # Create a subplot with a line plot
-        fig = make_subplots(rows=1, cols=1)
-        fig.add_trace(
-            px.line(
-                df,
-                x='DatePosted',
-                y='Moodtype',
-                markers='Moodtype',  # Use markers to represent each mood type
-                line_shape='linear'  # Connect points with a line
-            ).update_traces(selector=dict(type='scatter'), showlegend=False).data[0]
+        fig = px.line(
+            df,
+            x='DatePosted',
+            y='Moodtype',
+            markers='Moodtype',  
+            line_shape='linear',  
+            category_orders={'Moodtype': ['Excited', 'Happy', 'Fear', 'Sad', 'Angry']}
         )
 
         # Add rangeselector to enable zooming

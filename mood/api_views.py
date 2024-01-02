@@ -20,6 +20,12 @@ class MoodDataViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+    def list(self, request, *args, **kwargs):
+        # Your implementation for listing (GET) MoodData
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
 class Login(APIView):
     def post(self, request):
         user = authenticate(username=request.data.get("username"), password=request.data.get("password"))
@@ -32,4 +38,3 @@ class MoodDataDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = MoodData.objects.all()
     serializer_class = MoodDataSerializers
     permission_classes = [IsAuthenticated]
-    lookup_field = 'token'
