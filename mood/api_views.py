@@ -8,23 +8,28 @@ from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 from rest_framework.status import HTTP_404_NOT_FOUND,HTTP_200_OK
 from rest_framework.authtoken.models import Token
-from rest_framework import generics
 from .serializers import MoodDataSerializers
+from rest_framework import status
+from rest_framework.response import Response
+from .serializers import UserRegistrationSerializer
 
 class MoodDataViewSet(viewsets.ModelViewSet):
     serializer_class=MoodDataSerializers
-    queryset=MoodData.objects.all()
     authentication_classes=[TokenAuthentication]
     permission_classes=[IsAuthenticated]
+    queryset=MoodData.objects.all()
 
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            user_mood = MoodData.objects.filter(user=self.request.user)
+            return user_mood
+        else:
+            return MoodData.objects.none()
+        
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        
+        return serializer.save(user=self.request.user)
 
-    def list(self, request, *args, **kwargs):
-        # Your implementation for listing (GET) MoodData
-        queryset = self.get_queryset()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data)
 
 class Login(APIView):
     def post(self, request):
@@ -34,7 +39,14 @@ class Login(APIView):
         token, _ = Token.objects.get_or_create(user=user)
         return Response({'token': token.key}, status=HTTP_200_OK)
     
-class MoodDataDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = MoodData.objects.all()
-    serializer_class = MoodDataSerializers
-    permission_classes = [IsAuthenticated]
+
+class UserRegistrationAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = UserRegistrationSerializer(data=request.data)
+
+        if serializer.is_valid():
+            user = serializer.save()
+            return Response({'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+

@@ -18,16 +18,16 @@ from django.urls import path, include
 from django.contrib.auth.views import LoginView,LogoutView
 from users.views import Homepage,SignUpView,ProfileView
 from rest_framework.routers import DefaultRouter
-from mood.api_views import MoodDataViewSet,Login,MoodDataDetailAPIView
+from mood.api_views import MoodDataViewSet,Login,UserRegistrationAPIView
 from users.api_views import CustomUserViewset
 router=DefaultRouter()
-router.register(r'mood',MoodDataViewSet)
+router.register(r'mood',MoodDataViewSet,basename='user_mood')
 router.register(r'users',CustomUserViewset)
 
 urlpatterns = [path("admin/", admin.site.urls),
                path("api/",include((router.urls, 'api'))),
                path("api/login",Login.as_view(),name='api-login'),
-               path('api/mood/<str:pk>/', MoodDataDetailAPIView.as_view(), name='mood-data-detail'),
+               path("api/register",UserRegistrationAPIView.as_view(),name='api-register'),
                path("home/", include("mood.urls")),
                path('',Homepage.as_view(),name='homepage'),
                path('signin/',SignUpView.as_view(),name='signup'),
