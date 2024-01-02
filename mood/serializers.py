@@ -5,13 +5,14 @@ from rest_framework import serializers
 from .models import CustomUser
 from django.core.exceptions import ValidationError
 from datetime import date
-
+from .views import model
 
 class MoodDataSerializers(serializers.ModelSerializer):
 
     token=serializers.SerializerMethodField(read_only=True)
     dateposted=serializers.SerializerMethodField(read_only=True)
     user = serializers.SerializerMethodField(read_only=True)
+    moodtype=serializers.CharField(required=False)
     class Meta:
         model=MoodData
         fields='__all__'
@@ -28,8 +29,17 @@ class MoodDataSerializers(serializers.ModelSerializer):
 
         return obj.user.username
     
+    def validate(self, data):
+        selected_mood = data.get('moodtype')
+        description = data.get('description')
 
+        
+        if not selected_mood:
+            predicted_mood = model.predict([description])[0]
+            data['moodtype'] = predicted_mood
 
+        return data
+    
 
 class UserRegistrationSerializer(serializers.Serializer):
     username = serializers.CharField()
