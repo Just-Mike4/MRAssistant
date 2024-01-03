@@ -11,6 +11,9 @@
       </fieldset>
       <div class="form-group">
           <button class="btn btn-outline-info custom-btn" type="submit">Login</button>
+            <small class="text-muted ml-2">
+                <a href="{% url 'password-reset' %}"> Forgot Password?</a>
+            </small>
       </div>
       <div class="border-top pt-3">
           <small class="text-muted">Need an account?<a class="ml-2" href="{% url 'signup' %}"> Sign Up Now</a></small>
