@@ -54,7 +54,7 @@ The API documentation is available at the following endpoints:
         {
             "username": "",
             "email": "",
-            "date_of_birth": "",
+            "date_of_birth": "", //Format= YYYY-MM-DD
             "password1": "",
             "password2": ""
         }
@@ -83,7 +83,7 @@ The API documentation is available at the following endpoints:
             "id": 0,
             "username": "",
             "email": "",
-            "date_of_birth": ""
+            "date_of_birth": "" //Format : YYYY-MM-DD
             }
         ]
         ```
@@ -99,7 +99,7 @@ The API documentation is available at the following endpoints:
             "id": 0,
             "username": "",
             "email": "",
-            "date_of_birth": ""
+            "date_of_birth": "" //Format : YYYY-MM-DD
             }
         ```
 
@@ -113,7 +113,7 @@ The API documentation is available at the following endpoints:
             {
             "username": "",
             "email": "",
-            "date_of_birth": ""
+            "date_of_birth": "" //Format : YYYY-MM-DD
             }
         ```
 
@@ -135,7 +135,7 @@ The API documentation is available at the following endpoints:
             [
                 {
                     "token": "",
-                    "dateposted": "",
+                    "dateposted": "", //Format : YYYY-MM-DD HH:MM:SS
                     "user": "",
                     "moodtype": "",
                     "description": ""
@@ -173,7 +173,7 @@ The API documentation is available at the following endpoints:
         ```json
                 {
                     "token": "",
-                    "dateposted": "",
+                    "dateposted": "", //Format : YYYY-MM-DD HH:MM:SS
                     "user": "",
                     "moodtype": "",
                     "description": ""

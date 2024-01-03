@@ -7,7 +7,7 @@ from django.views.generic import CreateView,TemplateView,UpdateView
 from .models import CustomUser
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-
+from django.contrib.auth.views import LoginView
 # Create your views here.
 
 class Homepage(TemplateView):
@@ -15,7 +15,6 @@ class Homepage(TemplateView):
     
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         if request.user.is_authenticated:
-            # Redirect authenticated users to MoodDashboardView
             return redirect("mood-home")
         return super().dispatch(request, *args, **kwargs)
 
@@ -24,6 +23,19 @@ class SignUpView(CreateView,SuccessMessageMixin):
     template_name='users/signup.html'
     success_url='/login'
     success_message='User Account Created, You Can Now Login'
+
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        if request.user.is_authenticated:
+            return redirect("mood-home")
+        return super().dispatch(request, *args, **kwargs)
+
+class LogInView(LoginView):
+    template_name='users/login.html'
+
+    def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
+        if request.user.is_authenticated:
+            return redirect("mood-home")
+        return super().dispatch(request, *args, **kwargs)
 
 class ProfileView(LoginRequiredMixin,SuccessMessageMixin,UpdateView):
     model=CustomUser
@@ -39,3 +51,4 @@ class ProfileView(LoginRequiredMixin,SuccessMessageMixin,UpdateView):
     
     def get_object(self, queryset=None):
         return self.request.user
+

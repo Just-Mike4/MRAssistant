@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.contrib.auth.views import LoginView,LogoutView
-from users.views import Homepage,SignUpView,ProfileView
+from django.contrib.auth.views import LogoutView
+from users.views import Homepage,SignUpView,ProfileView,LogInView
 from rest_framework.routers import DefaultRouter
 from mood.api_views import MoodDataViewSet,Login,UserRegistrationAPIView
 from users.api_views import CustomUserViewset
+
 router=DefaultRouter()
 router.register(r'mood',MoodDataViewSet,basename='user_mood')
 router.register(r'user',CustomUserViewset,basename='user_profile')
@@ -31,7 +32,7 @@ urlpatterns = [path("admin/", admin.site.urls),
                path("home/", include("mood.urls")),
                path('',Homepage.as_view(),name='homepage'),
                path('signin/',SignUpView.as_view(),name='signup'),
-               path('login/',LoginView.as_view(template_name='users/login.html'),name='login'),
+               path('login/',LogInView.as_view(),name='login'),
                path('logout/',LogoutView.as_view(template_name='users/logout.html'),name='logout'),
                path('profile/',ProfileView.as_view(),name='profile'),
                ]
