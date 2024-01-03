@@ -10,7 +10,6 @@ from joblib import load
 from plotly.offline import plot
 import plotly.express as px
 import pandas as pd
-from plotly.subplots import make_subplots
 from .function import get_random_unique_recommendations
 # Create your views here.
 
@@ -56,9 +55,9 @@ class MoodDashboardView(LoginRequiredMixin,ListView):
                 rangeselector=dict(
                     buttons=list([
                         dict(count=1, label="1d", step="day", stepmode="backward"),
+                        dict(count=7, label="1w", step="day", stepmode="backward"),
                         dict(count=1, label="1m", step="month", stepmode="backward"),
                         dict(count=6, label="6m", step="month", stepmode="backward"),
-                        dict(count=1, label="YTD", step="year", stepmode="todate"),
                         dict(count=1, label="1y", step="year", stepmode="backward"),
                         dict(step="all")
                     ])
