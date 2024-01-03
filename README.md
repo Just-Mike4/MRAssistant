@@ -40,7 +40,7 @@ Explore and interact with the application through the API, providing easy access
 - **Register User Endpoint:** `/register` (Method: POST)
 - **User Login Endpoint:** `/login` (Method: POST)
 - **User Information Endpoint:** `/user/` (Method: GET)
-- **Specific User Information Endpoint:** `/users/<int:pk>/` (Method: GET,PUT,DELETE)
+- **Specific User Information Endpoint:** `/user/<int:pk>/` (Method: GET,PUT,DELETE)
 - **User Mood Information Endpoint:** `/mood/` (Method: GET,POST)
 - **Specific User Mood Information Endpoint:** `/mood/<str:pk>/` (Method: GET,PUT,DELETE)
 
