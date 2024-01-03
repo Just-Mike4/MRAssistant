@@ -37,12 +37,12 @@ This full stack django web application utilizes user authentication and mood tra
 ## API Documentation
 ### API Endpoint for Seamless Interaction
 Explore and interact with the application through the API, providing easy access to various functionalities.
-    - **Register User Endpoint:** `/register` (Method: POST)
-    - **User Login Endpoint:** `/login` (Method: POST)
-    - **User Information Endpoint:** `/user/` (Method: GET)
-    - **Specific User Information Endpoint:** `/users/<int:pk>/` (Method: GET,PUT,DELETE)
-    - **User Mood Information Endpoint:** `/mood/` (Method: GET,POST)
-    - **Specific User Mood Information Endpoint:** `/mood/<str:pk>/` (Method: GET,PUT,DELETE)
+- **Register User Endpoint:** `/register` (Method: POST)
+- **User Login Endpoint:** `/login` (Method: POST)
+- **User Information Endpoint:** `/user/` (Method: GET)
+- **Specific User Information Endpoint:** `/users/<int:pk>/` (Method: GET,PUT,DELETE)
+- **User Mood Information Endpoint:** `/mood/` (Method: GET,POST)
+- **Specific User Mood Information Endpoint:** `/mood/<str:pk>/` (Method: GET,PUT,DELETE)
 
 The API documentation is available at the following endpoints:
 
