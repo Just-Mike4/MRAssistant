@@ -64,14 +64,17 @@
           </li>
           <li>
           <li>
-            <a href="{% url 'logout'%}">
-                <i class="bx bx-log-out" id="log_out"></i>
-                <span class="links_name">Logout</span>
-            </a>
-            <span class="tooltip">Logout</span>
+             <a href="#" id="logout-link">
+              <i class="bx bx-log-out" id="log_out"></i>
+              <span class="links_name">Logout</span>
+          </a>
+          <span class="tooltip">Logout</span>
           </li>
         </ul>
       </div>
+      <form id="logout-form" method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+    </form>
       <section class="home-section">
         
         {% if messages %}
@@ -85,5 +88,16 @@
       </section>
     
       <script type="text/javascript" src="{% static 'mood/js/page.js' %}"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var logoutLink = document.getElementById('logout-link');
+            var logoutForm = document.getElementById('logout-form');
+
+            logoutLink.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default link behavior
+                logoutForm.submit();    // Submit the form
+            });
+        });
+    </script>
 </body>
 </html>

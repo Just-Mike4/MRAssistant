@@ -8,6 +8,7 @@ from .models import CustomUser
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 # Create your views here.
 
 class Homepage(TemplateView):
@@ -21,8 +22,13 @@ class Homepage(TemplateView):
 class SignUpView(CreateView,SuccessMessageMixin):
     form_class=UserForm
     template_name='users/signup.html'
-    success_url='/login'
+    success_url = reverse_lazy('login')
     success_message='User Account Created, You Can Now Login'
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        
+        return response
 
     def dispatch(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         if request.user.is_authenticated:

@@ -35,40 +35,43 @@ class MoodDashboardView(LoginRequiredMixin,ListView):
 
         } 
         for x in data]
+        if not plot_data:
+            return context
+        else:
 
-        df=pd.DataFrame(plot_data)
+            df=pd.DataFrame(plot_data)
 
-        df['DatePosted'] = pd.to_datetime(df['DatePosted'])
+            df['DatePosted'] = pd.to_datetime(df['DatePosted'])
 
-        fig = px.line(
-            df,
-            x='DatePosted',
-            y='Moodtype',
-            markers='Moodtype',  
-            line_shape='linear',  
-            category_orders={'Moodtype': ['Excited', 'Happy', 'Fear', 'Sad', 'Angry']}
-        )
+            fig = px.line(
+                df,
+                x='DatePosted',
+                y='Moodtype',
+                markers='Moodtype',  
+                line_shape='linear',  
+                category_orders={'Moodtype': ['Excited', 'Happy', 'Fear', 'Sad', 'Angry']}
+            )
 
-        # Add rangeselector to enable zooming
-        fig.update_layout(
-            xaxis=dict(
-                rangeselector=dict(
-                    buttons=list([
-                        dict(count=1, label="1d", step="day", stepmode="backward"),
-                        dict(count=7, label="1w", step="day", stepmode="backward"),
-                        dict(count=1, label="1m", step="month", stepmode="backward"),
-                        dict(count=6, label="6m", step="month", stepmode="backward"),
-                        dict(count=1, label="1y", step="year", stepmode="backward"),
-                        dict(step="all")
-                    ])
+            # Add rangeselector to enable zooming
+            fig.update_layout(
+                xaxis=dict(
+                    rangeselector=dict(
+                        buttons=list([
+                            dict(count=1, label="1d", step="day", stepmode="backward"),
+                            dict(count=7, label="1w", step="day", stepmode="backward"),
+                            dict(count=1, label="1m", step="month", stepmode="backward"),
+                            dict(count=6, label="6m", step="month", stepmode="backward"),
+                            dict(count=1, label="1y", step="year", stepmode="backward"),
+                            dict(step="all")
+                        ])
+                    ),
+                    rangeslider=dict(visible=True),
+                    type="date"
                 ),
-                rangeslider=dict(visible=True),
-                type="date"
-            ),
-            yaxis_title='Mood Type',
-        )
-        mood_plot=plot(fig,output_type="div")
-        context['mood_plot']=mood_plot
+                yaxis_title='Mood Type',
+            )
+            mood_plot=plot(fig,output_type="div")
+            context['mood_plot']=mood_plot
 
         return context
 
