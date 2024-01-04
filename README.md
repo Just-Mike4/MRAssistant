@@ -16,7 +16,7 @@ This full stack django web application utilizes user authentication and mood tra
 ## Usage
 1. **Clone the Repository:**
     ```bash
-    git clone <repository_url>
+    git clone https://github.com/Just-Mike4/MRAssistant
     ```
 
 2. **Install Dependencies:**
@@ -159,8 +159,8 @@ The API documentation is available at the following endpoints:
         - Request Body:
             ```json
                 {
-                    "moodtype": "", 
-                    "description":"" #Required
+                    "moodtype": "", // Optional: If not provided, the NLP model will predict it.
+                    "description":"", //Required
                 }
             ```
 
