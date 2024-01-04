@@ -4,9 +4,9 @@ html,body {
     height: 100%;
     width: 100%;
     background-image: url('../img/BGND.png');
-    background-size: cover; /* Adjust as needed */
-    background-position: center; /* Adjust as needed */
-    background-repeat: no-repeat; /* Adjust as needed */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
     overflow: auto;
 }
 
@@ -20,7 +20,7 @@ body h1, .column-heading{
 }
 
 
-body p, body div a, .text-muted{
+body p{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,8 +28,15 @@ body p, body div a, .text-muted{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+body div a, .text-muted{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
 body div a:hover{
-    color: rgb(213, 222, 183);
+    color: aquamarine;
 }
 
 body div small{
@@ -90,6 +97,6 @@ legend {
 .custom-btn:hover {
     color: aquamarine;
     border-color: aquamarine;
-    background-color: rgb(61, 83, 75);
+    background-color: rgba(255, 255, 255, 0.652);
   }
   
