@@ -23,8 +23,15 @@ This full stack django web application utilizes user authentication and mood tra
     ```bash
     pip install -r requirements.txt
     ```
+3. **Run the Jupyter Notebook:**
+    - Open a terminal and navigate to the project directory.
+    - Launch Jupyter Notebook:
+        ```bash
+        jupyter notebook "MRA NLP Emotion Prediction.ipynb"
+        ```
+    - In the Jupyter Notebook interface, run all the cells in the notebook.
 
-3. **Run the Server:**
+4. **Run the Server:**
     - For Windows:
         ```bash
         python manage.py runserver
