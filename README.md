@@ -16,7 +16,7 @@ This full stack django web application utilizes user authentication and mood tra
 ## Usage
 1. **Clone the Repository:**
     ```bash
-    git clone https://github.com/Just-Mike4/MRAssistant
+    git clone https://github.com/Just-Mike4/MRAssistant.git
     ```
 
 2. **Install Dependencies:**
