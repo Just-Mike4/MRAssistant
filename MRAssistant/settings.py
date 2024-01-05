@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-0b)7x2@9&-!@fl5$ndloser+h7any2vsxn0*-h%@a^lv7m7cn*
 DEBUG = True
 
 ALLOWED_HOSTS = ['https://literate-space-parakeet-w49wpg6q76jcv6vp-8000.preview.app.github.dev/',
-'localhost','127.0.0.1']
+'localhost','127.0.0.1','0.0.0.0']
 
 
 # Application definition
@@ -160,4 +160,4 @@ EMAIL_HOST_PASSWORD=os.environ.get("EMAIL_PASS")
 
 SECURE_REFERRER_POLICY = 'same-origin'
 
-CSRF_TRUSTED_ORIGINS = ['https://literate-space-parakeet-w49wpg6q76jcv6vp-8000.preview.app.github.dev']
+CSRF_TRUSTED_ORIGINS = ['https://literate-space-parakeet-w49wpg6q76jcv6vp-8000.preview.app.github.dev','http://0.0.0.0:8000']
