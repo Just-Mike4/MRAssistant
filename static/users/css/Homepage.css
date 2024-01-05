@@ -1,0 +1,102 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('../img/BGND.png');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    overflow: auto;
+}
+
+body h1, .column-heading{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    padding-top: 6%;
+    color: aquamarine;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+body p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: aquamarine;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body div a, .text-muted{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+body div a:hover{
+    color: aquamarine;
+}
+
+body div small{
+    font-style: italic;
+    color: aquamarine;
+}
+
+.content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40%; 
+}
+
+
+form {
+    height: 30%;
+    height: 100px;
+    width: 500px;
+}
+
+@media only screen and (max-width: 767px) {
+    form {
+        /* Adjust styles for small devices here */
+        width: 60%; /* Make the form full width on small devices */
+    }
+    body h1{
+        padding-top: 10%;
+    }
+}
+
+label {
+    color: aquamarine; /* Set the color you prefer */
+}
+
+legend {
+    color: aquamarine; /* Set the color you prefer for the legend */
+}
+
+.label {
+    color: aquamarine; /* Set the color you prefer for labels */
+}
+
+.form-text {
+    color:  aquamarine; /* Set the color you prefer for help text */
+}
+
+.text-muted{
+    color: black;
+}
+
+.custom-btn {
+    color: aquamarine;
+    border-color: aquamarine;
+  }
+
+.custom-btn:hover {
+    color: aquamarine;
+    border-color: aquamarine;
+    background-color: rgba(255, 255, 255, 0.652);
+  }
+  
