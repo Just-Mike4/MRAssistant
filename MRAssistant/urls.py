@@ -22,6 +22,8 @@ from users.views import Homepage,SignUpView,ProfileView,LogInView
 from rest_framework.routers import DefaultRouter
 from mood.api_views import MoodDataViewSet,Login,UserRegistrationAPIView
 from users.api_views import CustomUserViewset
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 router=DefaultRouter()
@@ -51,3 +53,6 @@ urlpatterns = [path("protectedmoodadmin/", admin.site.urls),
                     PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'),
                     name='password_reset_complete'),
                ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

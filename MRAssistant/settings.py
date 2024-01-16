@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-0b)7x2@9&-!@fl5$ndloser+h7any2vsxn0*-h%@a^lv7m7cn*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['https://literate-space-parakeet-w49wpg6q76jcv6vp-8000.preview.app.github.dev/',
 'localhost','127.0.0.1','0.0.0.0']
