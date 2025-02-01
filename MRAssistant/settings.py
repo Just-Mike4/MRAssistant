@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-0b)7x2@9&-!@fl5$ndloser+h7any2vsxn0*-h%@a^lv7m7cn*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['https://literate-space-parakeet-w49wpg6q76jcv6vp-8000.preview.app.github.dev/',
 'localhost','127.0.0.1','0.0.0.0']
@@ -125,7 +125,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT= "static/"
+STATIC_ROOT= "/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -160,4 +160,4 @@ EMAIL_HOST_PASSWORD=os.environ.get("EMAIL_PASS")
 
 SECURE_REFERRER_POLICY = 'same-origin'
 
-CSRF_TRUSTED_ORIGINS = ['https://literate-space-parakeet-w49wpg6q76jcv6vp-8000.preview.app.github.dev','http://0.0.0.0:8000']
+# CSRF_TRUSTED_ORIGINS = ['https://literate-space-parakeet-w49wpg6q76jcv6vp-8000.preview.app.github.dev','http://0.0.0.0:8000',"*"]

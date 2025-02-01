@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.views import (LogoutView,PasswordResetView,
-                                       PasswordResetConfirmView,PasswordResetDoneView,
-                                       PasswordResetCompleteView)
+                                        PasswordResetConfirmView,PasswordResetDoneView,
+                                        PasswordResetCompleteView)
 from users.views import Homepage,SignUpView,ProfileView,LogInView
 from rest_framework.routers import DefaultRouter
 from mood.api_views import MoodDataViewSet,Login,UserRegistrationAPIView
@@ -54,5 +54,5 @@ urlpatterns = [path("protectedmoodadmin/", admin.site.urls),
                     name='password_reset_complete'),
                ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
